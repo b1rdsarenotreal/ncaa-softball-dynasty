@@ -1,0 +1,300 @@
+Oklahoma|Oklahoma|OU|Sooners|#841617|#FDF9D8|Patty Gasso
+Texas|Texas|TEX|Longhorns|#BF5700|#FFFFFF|Mike White
+Texas A&M|Texas A&M|TAMU|Aggies|#500000|#FFFFFF|Trisha Ford
+Arkansas|Arkansas|ARK|Razorbacks|#9D2235|#FFFFFF|Courtney Deifel
+Tennessee|Tennessee|TENN|Lady Vols|#FF8200|#58595B|Karen Weekly
+Texas Tech|Texas Tech|TTU|Red Raiders|#CC0000|#000000|Gerry Glasco
+UCLA|UCLA|UCLA|Bruins|#2D68C4|#F2A900|Kelly Inouye-Perez
+Florida|Florida|UF|Gators|#0021A5|#FA4616|Tim Walton
+Florida St.|Florida State|FSU|Seminoles|#782F40|#CEB888|Lonni Alameda
+South Carolina|South Carolina|SC|Gamecocks|#73000A|#000000|Ashley Chastain
+Oregon|Oregon|ORE|Ducks|#154733|#FEE123|Melyssa Lombardi
+LSU|LSU|LSU|Tigers|#461D7C|#FDD023|Beth Torina
+Arizona|Arizona|ARIZ|Wildcats|#CC0033|#003366|Caitlin Lowe
+Clemson|Clemson|CLEM|Tigers|#F56600|#522D80|John Rittman
+Ole Miss|Ole Miss|MISS|Rebels|#CE1126|#14213D|Jamie Trachsel
+Stanford|Stanford|STAN|Cardinal|#8C1515|#FFFFFF|Jessica Allister
+Virginia Tech|Virginia Tech|VT|Hokies|#861F41|#E5751F|Pete D'Amour
+Mississippi St.|Mississippi State|MSST|Bulldogs|#660000|#FFFFFF|Samantha Ricketts
+Alabama|Alabama|BAMA|Crimson Tide|#9E1B32|#828A8F|Patrick Murphy
+Duke|Duke|DUKE|Blue Devils|#003087|#FFFFFF|Marissa Young
+Nebraska|Nebraska|NEB|Cornhuskers|#E41C38|#FDF2D9|Rhonda Revelle
+Ohio St.|Ohio State|OSU|Buckeyes|#BB0000|#666666|Kirin Kumar
+Oklahoma St.|Oklahoma State|OKST|Cowgirls|#FF7300|#000000|Kenny Gajewski
+Georgia|Georgia|UGA|Bulldogs|#BA0C2F|#000000|Tony Baldwin
+Auburn|Auburn|AUB|Tigers|#0C2340|#E87722|Chris & Kate Malveaux
+Grand Canyon|Grand Canyon|GCU|Lopes|#522398|#000000|Shanon Hays
+Liberty|Liberty|LIB|Flames|#0A254E|#C2002F|Dot Richardson
+California|California|CAL|Golden Bears|#003262|#FDB515|Steve Singleton
+Virginia|Virginia|UVA|Cavaliers|#232D4B|#E57200|Joanna Hardin
+Nevada|Nevada|NEV|Wolf Pack|#003366|#807F84|Victoria Hayward
+Fla. Atlantic|Florida Atlantic|FAU|Owls|#003366|#CC0000|Jordan Clark
+Washington|Washington|UW|Huskies|#4B2E83|#B7A57A|Heather Tarr
+San Diego St.|San Diego State|SDSU|Aztecs|#A6192E|#000000|Stacey Nuveman Deniz
+South Fla.|South Florida|USF|Bulls|#006747|#CFC493|Ken Eriksen
+North Carolina|North Carolina|UNC|Tar Heels|#7BAFD4|#13294B|Megan Smith
+Kentucky|Kentucky|UK|Wildcats|#0033A0|#FFFFFF|Rachel Lawson
+UCF|UCF|UCF|Knights|#000000|#BA9B37|Cindy Ball-Malone
+Arizona St.|Arizona State|ASU|Sun Devils|#8C1D40|#FFC627|Megan Bartlett
+Michigan|Michigan|MICH|Wolverines|#00274C|#FFCB05|Bonnie Tholl
+Indiana|Indiana|IU|Hoosiers|#990000|#EEEDEB|Shonda Stanton
+BYU|BYU|BYU|Cougars|#002E5D|#FFFFFF|Gordon Eakin
+Missouri|Missouri|MIZ|Tigers|#F1B82D|#000000|Larissa Anderson
+Iowa|Iowa|IOWA|Hawkeyes|#FFCD00|#000000|Stacy May-Johnson
+Northwestern|Northwestern|NW|Wildcats|#4E2A84|#FFFFFF|Kate Drohan
+North Florida|North Florida|UNF|Ospreys|#00246B|#8A8D8F|Jeff Conrad
+Southeastern La.|Southeastern Louisiana|SELA|Lions|#006341|#EEB111|Rick Fremin
+Marist|Marist|MRST|Red Foxes|#C8102E|#FFFFFF|Joe Ausanio
+Omaha|Omaha|OMA|Mavericks|#D71920|#000000|Mike Heard
+Cal St. Fullerton|Cal State Fullerton|CSUF|Titans|#00274C|#FF7900|Gina Oaks Garcia
+Fresno St.|Fresno State|FRES|Bulldogs|#DB0032|#002E6D|Charlotte Morgan
+Coastal Carolina|Coastal Carolina|CCU|Chanticleers|#006F71|#A27752|Kelley Green
+Iowa St.|Iowa State|ISU|Cyclones|#C8102E|#F1BE48|Jamie Pinkerton
+Georgia Tech|Georgia Tech|GT|Yellow Jackets|#B3A369|#003057|Aileen Morales
+Belmont|Belmont|BEL|Bruins|#002D62|#C8102E|Laura Matthews
+Texas St.|Texas State|TXST|Bobcats|#501214|#8D734A|Ricci Woodard
+North Texas|North Texas|UNT|Mean Green|#00853E|#000000|Cody White
+Wisconsin|Wisconsin|WIS|Badgers|#C5050C|#FFFFFF|Yvette Healy
+Baylor|Baylor|BAY|Bears|#154734|#FFB81C|Glenn Moore
+Purdue|Purdue|PUR|Boilermakers|#CEB888|#000000|Magali Frezzotti
+McNeese|McNeese|MCN|Cowgirls|#00529B|#FFD204|James Landreneau
+Idaho St.|Idaho State|IDST|Bengals|#F47920|#000000|Andrew Rich
+Boise St.|Boise State|BSU|Broncos|#0033A0|#D64309|Justin Shults
+Eastern Ky.|Eastern Kentucky|EKU|Colonels|#861F41|#FFFFFF|Jane Worthington
+Louisiana|Louisiana|ULL|Ragin' Cajuns|#CE181E|#0A0A0A|Alyson Habetz
+Jacksonville St.|Jacksonville State|JVST|Gamecocks|#CC0000|#000000|Julie Boland
+UConn|UConn|UCONN|Huskies|#000E2F|#E4002B|Laura Valentino
+Louisville|Louisville|LOU|Cardinals|#AD0000|#000000|Holly Aprile
+Chattanooga|Chattanooga|UTC|Mocs|#00386B|#E0AA0F|Frank Reed
+Syracuse|Syracuse|SYR|Orange|#F76900|#000E54|Shannon Doepking
+Binghamton|Binghamton|BING|Bearcats|#005A43|#FFFFFF|Jess Bump
+Louisiana Tech|Louisiana Tech|LT|Lady Techsters|#002F8B|#E31B23|Josh Taylor
+St. John's (NY)|St. John's|SJU|Red Storm|#BA0C2F|#FFFFFF|Bob Guerrero
+Kansas|Kansas|KU|Jayhawks|#0051BA|#E8000D|Jennifer McFalls
+Marshall|Marshall|MRSH|Thundering Herd|#00B140|#000000|Morgan Zerkle
+Austin Peay|Austin Peay|APSU|Governors|#C41E3A|#FFFFFF|Kassie Stanfill
+Wichita St.|Wichita State|WICH|Shockers|#FFCD00|#000000|Kristi Bredbenner
+Southern Ill.|Southern Illinois|SIU|Salukis|#720000|#FFFFFF|Jen Sewell
+Charlotte|Charlotte|CLT|49ers|#005035|#A49665|Courtney Breault
+Saint Mary's (CA)|Saint Mary's|SMC|Gaels|#06315B|#D80024|Sonja Garnett
+UNC Greensboro|UNC Greensboro|UNCG|Spartans|#0F2044|#FFB71B|Janelle Breneman
+ULM|ULM|ULM|Warhawks|#840029|#BA9B37|Molly Fichtner
+Western Ky.|Western Kentucky|WKU|Hilltoppers|#C60C30|#FFFFFF|Amy Tudor
+USC Upstate|USC Upstate|UPST|Spartans|#00703C|#000000|Chris Hawkins
+Ohio|Ohio|OHIO|Bobcats|#00694E|#FFFFFF|Paige McMenemy
+Delaware|Delaware|DEL|Blue Hens|#00539F|#FFD200|Jennifer Steele
+Boston U.|Boston University|BU|Terriers|#CC0000|#FFFFFF|Ashley Waters
+NC State|NC State|NCST|Wolfpack|#CC0000|#000000|Lindsay Leftwich
+Hawaii|Hawaii|HAW|Rainbow Wahine|#024731|#FFFFFF|Panita Thanatharn
+UC Santa Barbara|UC Santa Barbara|UCSB|Gauchos|#003660|#FEBC11|Jo Evans
+Houston|Houston|HOU|Cougars|#C8102E|#FFFFFF|Chrissy Schoonmaker
+Notre Dame|Notre Dame|ND|Fighting Irish|#0C2340|#C99700|Kris Ganeff
+Penn St.|Penn State|PSU|Nittany Lions|#041E42|#FFFFFF|Clarisa Crowell
+Santa Clara|Santa Clara|SCU|Broncos|#862633|#FFFFFF|Gina Carbonatto
+Mercer|Mercer|MER|Bears|#F76800|#000000|Chris Kuhlmeyer
+Tarleton St.|Tarleton State|TAR|Texans|#4F2D7F|#FFFFFF|Mark Cumpian
+FIU|FIU|FIU|Panthers|#081E3F|#B6862C|Mike Larabee
+Samford|Samford|SAM|Bulldogs|#002649|#C8102E|Megan Curry
+Miami (OH)|Miami (OH)|M-OH|RedHawks|#C3142D|#000000|Mandy Gardner-Colegate
+UNI|Northern Iowa|UNI|Panthers|#4B116F|#FFCC00|Ryan Jacobs
+Troy|Troy|TROY|Trojans|#8A2432|#B3B5B8|Eric Newell
+Utah St.|Utah State|USU|Aggies|#0F2439|#A2AAAD|Todd Judge
+East Carolina|East Carolina|ECU|Pirates|#592A8A|#FDC82F|Shane Winkler
+Harvard|Harvard|HARV|Crimson|#A51C30|#000000|Jenny Rohn
+Princeton|Princeton|PRIN|Tigers|#E77500|#000000|Lisa Van Ackeren
+Ball St.|Ball State|BALL|Cardinals|#BA0C2F|#FFFFFF|Helen Peña
+Oregon St.|Oregon State|ORST|Beavers|#DC4405|#000000|Laura Berg
+Central Ark.|Central Arkansas|UCA|Sugar Bears|#4F2D7F|#A7A9AC|Kayla Lucas
+James Madison|James Madison|JMU|Dukes|#450084|#CBB677|Loren LaPorte
+Brown|Brown|BRWN|Bears|#4E3629|#ED1C24|Mary Holt-Kelsch
+Stetson|Stetson|STET|Hatters|#006747|#FFFFFF|Shellie Robinson
+Minnesota|Minnesota|MINN|Golden Gophers|#7A0019|#FFCC33|Piper Ritter
+Elon|Elon|ELON|Phoenix|#73000A|#B59A57|Kathy Bocock
+Long Beach St.|Long Beach State|LBSU|The Beach|#000000|#F0B323|Kendall Fearn
+Dayton|Dayton|DAY|Flyers|#CE1141|#004B8D|Cara LaPlaca
+North Ala.|North Alabama|UNA|Lions|#46166B|#DBA51F|Ashley Cozart
+Seattle U|Seattle U|SEA|Redhawks|#AA0000|#FFFFFF|Geoff Hirai
+South Dakota St.|South Dakota State|SDST|Jackrabbits|#0033A0|#FFD100|Kristina McSweeney
+New Mexico St.|New Mexico State|NMSU|Aggies|#861F41|#FFFFFF|Benet Higgs
+Ga. Southern|Georgia Southern|GASO|Eagles|#011E41|#A3AAAE|Sharon Perkins
+Sacramento St.|Sacramento State|SAC|Hornets|#043927|#C4B581|Lori Perez
+Nicholls|Nicholls|NICH|Colonels|#C41230|#A2AAAD|Ron Frost
+Illinois|Illinois|ILL|Fighting Illini|#E84A27|#13294B|Tyra Perry
+UNLV|UNLV|UNLV|Rebels|#CF0A2C|#666666|Kristie Fox
+Sam Houston|Sam Houston|SHSU|Bearkats|#F47A20|#002D72|Garrett Valis
+Boston College|Boston College|BC|Eagles|#98002E|#BC9B6A|Beth Krysiak
+LMU (CA)|Loyola Marymount|LMU|Lions|#00A6E1|#AB0C2F|Tairia Flowers
+Eastern Ill.|Eastern Illinois|EIU|Panthers|#004B83|#B3B5B8|Kristi Paulson
+Campbell|Campbell|CAMP|Fighting Camels|#F47920|#000000|Emily Carosone
+UT Arlington|UT Arlington|UTA|Mavericks|#0064B1|#F58025|Kara Dill
+Howard|Howard|HOW|Bison|#003A63|#E51937|Tori Tyson
+Southern Miss.|Southern Miss|USM|Golden Eagles|#000000|#FFAB00|Natalie Poole
+UIW|Incarnate Word|UIW|Cardinals|#CB2C30|#000000|Kim Dean
+Pittsburgh|Pittsburgh|PITT|Panthers|#003594|#FFB81C|Jenny Allard
+Weber St.|Weber State|WEB|Wildcats|#492365|#A7A9AC|Kristin Delahoussaye
+Radford|Radford|RAD|Highlanders|#C2011B|#004A80|Kevin Fagan
+Siena|Siena|SIE|Saints|#006B54|#FFC72C|Casey Bump
+Robert Morris|Robert Morris|RMU|Colonials|#14234B|#A6192E|Jexx Varner
+Maryland|Maryland|MD|Terrapins|#E03A3E|#FFD520|Lauren Karn
+Middle Tenn.|Middle Tennessee|MTSU|Blue Raiders|#0066CC|#000000|Jeff Breeden
+Creighton|Creighton|CREI|Bluejays|#005CA9|#FFFFFF|Krista Wood
+SIUE|SIU Edwardsville|SIUE|Cougars|#E21836|#000000|Ben Sorden
+South Dakota|South Dakota|USD|Coyotes|#AD0000|#000000|Shannon Pivovar
+Villanova|Villanova|NOVA|Wildcats|#00205B|#13B5EA|Bridget Orchard
+Seton Hall|Seton Hall|HALL|Pirates|#004488|#A2AAAD|Angie Churchill
+Saint Louis|Saint Louis|SLU|Billikens|#003DA5|#FFFFFF|Christy Connoyer
+Florida A&M|Florida A&M|FAMU|Rattlers|#F47321|#00843D|Brittany Beall
+Army West Point|Army|ARMY|Black Knights|#000000|#D3BC8D|Jen Consaul
+CSUN|Cal State Northridge|CSUN|Matadors|#CE1126|#000000|Jodi Cox
+Wofford|Wofford|WOF|Terriers|#886734|#000000|Chelsea Butler
+App State|App State|APP|Mountaineers|#222222|#FFCC00|Whitney Jones
+California Baptist|Cal Baptist|CBU|Lancers|#002855|#A27D4F|Brandon Telesco
+George Washington|George Washington|GW|Revolutionaries|#033C5A|#AA9868|Matt Klampert
+Lamar University|Lamar|LAM|Cardinals|#C8102E|#000000|Amy Hooks
+Winthrop|Winthrop|WIN|Eagles|#872434|#FFD100|Kendall Fuller
+Akron|Akron|AKR|Zips|#041E42|#A89968|Craig Nicholson
+Michigan St.|Michigan State|MSU|Spartans|#18453B|#FFFFFF|Sharonda McDonald-Kelley
+San Jose St.|San Jose State|SJSU|Spartans|#0055A2|#E5A823|Tammy Lohmann
+Columbia|Columbia|COLU|Lions|#9BCBEB|#002B7F|Jen Teague
+UTEP|UTEP|UTEP|Miners|#FF8200|#041E42|T. J. Hubbard
+Southeast Mo. St.|Southeast Missouri|SEMO|Redhawks|#C8102E|#000000|Mark Redburn
+UNCW|UNC Wilmington|UNCW|Seahawks|#006666|#FFD457|Ashley Wade
+UAB|UAB|UAB|Blazers|#1E6B52|#F4C300|Taylor Smartt
+Butler|Butler|BUT|Bulldogs|#13294B|#A7A9AC|Scott Hall
+FGCU|FGCU|FGCU|Eagles|#00885A|#002D72|Lindsay Fico
+South Alabama|South Alabama|USA|Jaguars|#00205B|#BF0D3E|Becky Clark
+Fordham|Fordham|FOR|Rams|#860038|#FFFFFF|Melissa Inouye
+Col. of Charleston|Charleston|COFC|Cougars|#800000|#C4A15A|Maggie Mirowka
+Saint Joseph's|Saint Joseph's|SJ|Hawks|#9E1B32|#A2AAAD|Gina McCool
+Central Mich.|Central Michigan|CMU|Chippewas|#6A0032|#FFC82E|McCall Salmon
+Utah|Utah|UTAH|Utes|#CC0000|#000000|Amy Hogue
+Southern Utah|Southern Utah|SUU|Thunderbirds|#C8102E|#FFFFFF|Don Don Williams
+San Diego|San Diego|SD|Toreros|#002868|#75BEE9|MJ Knighten
+Lehigh|Lehigh|LEH|Mountain Hawks|#653819|#FFFFFF|Fran Troyan
+Bradley|Bradley|BRAD|Braves|#A50000|#FFFFFF|Amy Hayes
+Illinois St.|Illinois State|ILST|Redbirds|#CE1126|#F9DD16|Tina Kramos
+Jacksonville|Jacksonville|JAX|Dolphins|#004D44|#FFFFFF|Erica Ayers
+SFA|Stephen F. Austin|SFA|Ladyjacks|#5F259F|#FFFFFF|Jeff Jackson
+New Mexico|New Mexico|UNM|Lobos|#BA0C2F|#A7A8AA|Nicole Dickson
+Iona|Iona|IONA|Gaels|#6F2C3F|#FFC72C|Andy Russo
+UC Riverside|UC Riverside|UCR|Highlanders|#2D6CC0|#F1AB00|Brittany Matta
+Rutgers|Rutgers|RUTG|Scarlet Knights|#CC0033|#000000|Kristen Butler
+Tulsa|Tulsa|TLSA|Golden Hurricane|#002D72|#C8102E|Crissy Strimple
+Prairie View|Prairie View A&M|PVAM|Panthers|#4F2D7F|#FDB913|Vernon Bland
+North Dakota|North Dakota|UND|Fighting Hawks|#009A44|#000000|Jordan Stevens
+Providence|Providence|PROV|Friars|#000000|#8A8D8F|Jill Karwoski
+LIU|LIU|LIU|Sharks|#69B3E7|#FFC72C|Rich Calvert
+Northern Colo.|Northern Colorado|UNCO|Bears|#013C65|#F6B000|Dedeann Pendleton-Helm
+Jackson St.|Jackson State|JKST|Tigers|#002147|#FFFFFF|Kevin Montgomery
+Colorado St.|Colorado State|CSU|Rams|#1E4D2B|#C8C372|Jen Fisher
+Tennessee St.|Tennessee State|TNST|Tigers|#00539F|#FFFFFF|Genee McRath
+Lipscomb|Lipscomb|LIP|Bisons|#331E54|#F4AA00|Kristin Ryman
+Saint Francis|Saint Francis|SFU|Red Flash|#C8102E|#000000|Bill Vasko
+Cleveland St.|Cleveland State|CLEV|Vikings|#006747|#FFFFFF|Amy Kyler
+Longwood|Longwood|LONG|Lancers|#002D72|#A2AAAD|Megan Brown
+Missouri St.|Missouri State|MOST|Bears|#5E0009|#FFFFFF|Kasey Griffith
+Hofstra|Hofstra|HOF|Pride|#003591|#FEDD00|Susan Cassidy-Lyke
+Stony Brook|Stony Brook|STBK|Seawolves|#990000|#16243E|Megan Bryant
+UTSA|UTSA|UTSA|Roadrunners|#0C2340|#F15A22|Vann Stuedeman
+NIU|Northern Illinois|NIU|Huskies|#BA0C2F|#000000|Kathryn Gleason
+Utah Valley|Utah Valley|UVU|Wolverines|#275D38|#FFFFFF|Cody Thomson
+Abilene Christian|Abilene Christian|ACU|Wildcats|#4F2170|#FFFFFF|Jo Koons
+North Dakota St.|North Dakota State|NDSU|Bison|#0A5640|#FFC72A|Darren Mueller
+Drake|Drake|DRKE|Bulldogs|#004477|#FFFFFF|Lindsay Diehl
+Fairfield|Fairfield|FAIR|Stags|#C8102E|#000000|Julie Brzezinski
+Delaware St.|Delaware State|DSU|Hornets|#C8102E|#00A3E0|Mike Shehorn
+Canisius|Canisius|CAN|Golden Griffins|#0E2756|#FFBA00|Joe Gierlak
+Purdue Fort Wayne|Purdue Fort Wayne|PFW|Mastodons|#000000|#CFB991|Amber Bowman
+Murray St.|Murray State|MUR|Racers|#002148|#ECAC00|Kara Amundson
+IU Indy|IU Indy|IUI|Jaguars|#990000|#FFD700|Elisabeth Beirne
+Western Caro.|Western Carolina|WCU|Catamounts|#592C88|#C1A875|Jim Clift
+Dartmouth|Dartmouth|DART|Big Green|#00693E|#FFFFFF|Jennifer Williams
+Cornell|Cornell|COR|Big Red|#B31B1B|#FFFFFF|Tara Smith
+UC Davis|UC Davis|UCD|Aggies|#022851|#FFBF00|Erin Thorpe
+Charleston So.|Charleston Southern|CHSO|Buccaneers|#002855|#A89968|Christi Musser
+Northern Ky.|Northern Kentucky|NKU|Norse|#000000|#FFC72C|Morgan Gerak
+Pacific|Pacific|PAC|Tigers|#F47920|#000000|Samantha Duran-Kukuk
+Bethune-Cookman|Bethune-Cookman|BCU|Wildcats|#6F263D|#F2A900|Laura Watten
+Memphis|Memphis|MEM|Tigers|#003087|#898D8D|Trena Prater
+Toledo|Toledo|TOL|Rockets|#15397F|#FFDA00|Jessica Bracamonte
+Yale|Yale|YALE|Bulldogs|#00356B|#FFFFFF|Laura Ricciardone
+Gardner-Webb|Gardner-Webb|GWU|Runnin' Bulldogs|#BF2F37|#000000|Bailey Wigness
+UAlbany|UAlbany|ALB|Great Danes|#46166B|#EEB211|Chris Cannata
+FDU|FDU|FDU|Knights|#002D72|#A6192E|Chris Foye
+UC San Diego|UC San Diego|UCSD|Tritons|#182B49|#C69214|Nikki Palmer
+Indiana St.|Indiana State|INST|Sycamores|#00669A|#FFFFFF|Windy Thees
+Loyola Chicago|Loyola Chicago|LUC|Ramblers|#7C1231|#F1BE48|Alicia Abbott
+Norfolk St.|Norfolk State|NORF|Spartans|#007A53|#F2A900|Tatjana Matthews
+UMBC|UMBC|UMBC|Retrievers|#000000|#FDB515|Angie Nicholson
+Quinnipiac|Quinnipiac|QU|Bobcats|#0A2240|#FFB81C|Hillary Smith
+Valparaiso|Valparaiso|VALP|Beacons|#613318|#FFCC00|Mike Armitage
+Southern U.|Southern|SOU|Jaguars|#00539F|#FDB913|Brittney Williams
+CSU Bakersfield|CSU Bakersfield|CSUB|Roadrunners|#003594|#FFC72C|Letty Olivarez
+Towson|Towson|TOW|Tigers|#FFBB00|#000000|Lisa Costello
+Utah Tech|Utah Tech|UTU|Trailblazers|#BA1C21|#003058|Randy Simkins
+Sacred Heart|Sacred Heart|SHU|Pioneers|#CE1141|#A2AAAD|Pam London
+Rider|Rider|RID|Broncs|#981E32|#FFFFFF|Davon Ortega
+Bryant|Bryant|BRY|Bulldogs|#000000|#C5B783|Bianka Bell
+Oakland|Oakland|OAK|Golden Grizzlies|#000000|#B59A57|Chris Stelma
+Buffalo|Buffalo|BUFF|Bulls|#005BBB|#FFFFFF|Chelsea Plimpton
+Evansville|Evansville|EVAN|Purple Aces|#4F2683|#F47321|Bailey Dillender
+Houston Christian|Houston Christian|HCU|Huskies|#00539B|#F37021|Mary-Ellen Hall
+Presbyterian|Presbyterian|PRES|Blue Hose|#00205B|#9D2235|David Williams
+Western Mich.|Western Michigan|WMU|Broncos|#6C4023|#B5A167|Marlee Wilson
+Tennessee Tech|Tennessee Tech|TNTC|Golden Eagles|#4F2984|#FFDD00|Danielle Penner
+Bucknell|Bucknell|BUCK|Bison|#E87722|#003865|Angie Stackhouse
+Georgia St.|Georgia State|GAST|Panthers|#0039A6|#C60C30|Becca Mueller
+Bowling Green|Bowling Green|BGSU|Falcons|#4F2C1D|#FE5000|Michelle Gardner
+South Carolina St.|South Carolina State|SCST|Bulldogs|#862633|#003DA5|Nakeya Hall
+Alabama A&M|Alabama A&M|AAMU|Bulldogs|#660000|#FFFFFF|Brian Daley
+Green Bay|Green Bay|GB|Phoenix|#006F44|#FFFFFF|Sara Kubuske
+Alabama St.|Alabama State|ALST|Hornets|#000000|#C99700|Camise Patterson
+ETSU|ETSU|ETSU|Buccaneers|#041E42|#FFC72C|Cheryl Milligan
+Kennesaw St.|Kennesaw State|KENN|Owls|#FDBB30|#0B1315|Selena Collins-Patterson
+George Mason|George Mason|GMU|Patriots|#006633|#FFCC33|Justin Walker
+DePaul|DePaul|DEP|Blue Demons|#005EB8|#E4002B|Liz Bouck-Jagielski
+Furman|Furman|FUR|Paladins|#582C83|#FFFFFF|Mary Beth Dennison
+Central Conn. St.|Central Connecticut|CCSU|Blue Devils|#1B49A2|#FFFFFF|Breanne Gleason
+Colgate|Colgate|COLG|Raiders|#821019|#FFFFFF|Marissa Lamison-Myers
+Portland St.|Portland State|PRST|Vikings|#154734|#FFFFFF|Meadow McWhorter
+UT Martin|UT Martin|UTM|Skyhawks|#0E1E3E|#FF6720|Chelsea Farmer
+Massachusetts|UMass|MASS|Minutewomen|#881C1C|#000000|Danielle Henderson
+Morgan St.|Morgan State|MORG|Bears|#0033A1|#F47937|Melisa Shock
+UMass Lowell|UMass Lowell|UML|River Hawks|#0067B1|#C8102E|Jen Starek
+Wagner|Wagner|WAG|Seahawks|#00483A|#FFFFFF|Glenn Moore
+Kent St.|Kent State|KENT|Golden Flashes|#002664|#EAAB00|Jessica O'Donnell
+Texas Southern|Texas Southern|TXSO|Tigers|#5D2A7D|#A2AAAD|Raven Rodriguez
+A&M-Corpus Christi|Texas A&M-Corpus Christi|AMCC|Islanders|#0067C5|#007F3E|Mark Montgomery
+Georgetown|Georgetown|GTWN|Hoyas|#041E42|#8D817B|Karla Ross
+Ark.-Pine Bluff|Arkansas-Pine Bluff|UAPB|Golden Lions|#000000|#E4A01B|Michael Bumpers
+Cal Poly|Cal Poly|CP|Mustangs|#154734|#BD8B13|Jenny Condon
+Grambling|Grambling State|GRAM|Tigers|#000000|#EEB111|D'Maria Matthews
+N.C. Central|NC Central|NCCU|Eagles|#880023|#A2AAAD|Now-Allah James
+Merrimack|Merrimack|MRMK|Warriors|#003768|#F2A900|Jill Gagnon
+Montana|Montana|MONT|Grizzlies|#70003C|#A7A9AC|Stef Ewing
+Hampton|Hampton|HAMP|Pirates|#0067AC|#FFFFFF|Cat Tarvin
+Rhode Island|Rhode Island|URI|Rams|#75B2DD|#002147|Mike Coutts
+Youngstown St.|Youngstown State|YSU|Penguins|#C8102E|#000000|Brian Campbell
+Detroit Mercy|Detroit Mercy|DET|Titans|#A6192E|#002D72|Dan Vitale
+Niagara|Niagara|NIAG|Purple Eagles|#582C83|#FFFFFF|Paul Gray
+Lafayette|Lafayette|LAF|Leopards|#910029|#000000|Kelliner Croushore
+Bellarmine|Bellarmine|BELL|Knights|#A6192E|#000000|Whitney Arion
+UIC|UIC|UIC|Flames|#001E62|#D50032|Megan Coronado
+Northwestern St.|Northwestern State|NWST|Lady Demons|#492F92|#F58025|Jenny Fuller
+St. Bonaventure|St. Bonaventure|SBU|Bonnies|#54261A|#FFFFFF|Camden Decker
+N.C. A&T|NC A&T|NCAT|Aggies|#004684|#FDB927|Jose Gonzalez Jr.
+Western Ill.|Western Illinois|WIU|Leathernecks|#663399|#FFCC00|Dwight Sanders
+Monmouth|Monmouth|MONM|Hawks|#041E42|#FFFFFF|Morgan Royer
+Kansas City|Kansas City|UMKC|Roos|#004B87|#FFC72C|Kiki Stokes O'Connor
+Saint Peter's|Saint Peter's|SPU|Peacocks|#0072CE|#FFFFFF|Alyssa Ruiz
+Alcorn|Alcorn State|ALCN|Braves|#46166B|#E9A900|Brianna Billie
+Maine|Maine|ME|Black Bears|#003263|#B0D7FF|Kim Stiles
+Manhattan|Manhattan|MAN|Jaspers|#00703C|#FFFFFF|Bridget Hurlman
+Morehead St.|Morehead State|MORE|Eagles|#005EB8|#FFCD00|Megan Griffith
+Mount St. Mary's|Mount St. Mary's|MSM|Mountaineers|#005596|#BBA36C|Anna Nagro
+Holy Cross|Holy Cross|HC|Crusaders|#602D89|#FFFFFF|Joe Ladino
+Penn|Penn|PENN|Quakers|#011F5B|#990000|Christie Novatin
+Drexel|Drexel|DREX|Dragons|#07294D|#FFC600|Brooke Kalman
+UMES|Maryland Eastern Shore|UMES|Hawks|#782F40|#9EA2A2|Aaron Robinson
+Coppin St.|Coppin State|COPP|Eagles|#2E1A47|#FFC72C|Mercedes Hargett
+Mississippi Val.|Mississippi Valley State|MVSU|Devilettes|#00703C|#E31837|Jimmy Buckner

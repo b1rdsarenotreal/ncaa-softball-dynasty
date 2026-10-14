@@ -4,7 +4,7 @@
 // after 5, and from the 8th inning each half starts with a runner on second.
 // A simulation is only a suggestion — the commissioner reviews and saves it.
 
-import { rng as makeRng } from './util.js?v=20261014155521';
+import { rng as makeRng } from './util.js?v=20261014163557';
 
 export const OVR_WEIGHTS = { off: 0.4, pit: 0.4, def: 0.2 };
 const ovrExact = t => t.off * OVR_WEIGHTS.off + t.pit * OVR_WEIGHTS.pit + t.def * OVR_WEIGHTS.def;

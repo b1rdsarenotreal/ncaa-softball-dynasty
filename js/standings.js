@@ -1,6 +1,6 @@
 // Records, conference standings with tiebreakers, and the RPI.
 
-import { pct, hashStr } from './util.js?v=20261014155521';
+import { pct, hashStr } from './util.js?v=20261014163557';
 
 export const isFinal = g => g.final && g.homeR != null && g.awayR != null;
 export const winnerOf = g => (g.homeR > g.awayR ? g.home : g.away);
@@ -84,12 +84,9 @@ export function rpi(season, filter = null) {
   return out;
 }
 
-// Quadrants: every team is placed in Q1–Q4 by RPI rank (top quarter is Q1),
-// and each team's record is split by the quadrant of the opponent. "Q1 wins"
-// are wins over top-quarter teams. Teams without games yet go in Q4.
 // NCAA team-sheet quadrants. A game's quadrant depends on the opponent's RPI
-// rank and where it was played, as on the NCAA's own sheets (for a
-// 300-team league; the cut-offs scale with league size):
+// rank and where it was played, as on the NCAA's own sheets. These are the
+// cut-offs for a 300-team league; they scale with league size (quadCuts):
 //   Q1: home 1-30, neutral 1-50, away 1-75
 //   Q2: home 31-75, neutral 51-100, away 76-135
 //   Q3: home 76-160, neutral 101-200, away 136-240
@@ -102,10 +99,15 @@ export function gameLocation(g, t) {
   if (g.neutral) return 'neutral';
   return g.home === t ? 'home' : 'away';
 }
+// The cut-offs for a league of `teamCount` teams, by location.
+export function quadCuts(teamCount = 300) {
+  const k = teamCount / 300;
+  return Object.fromEntries(Object.entries(QUAD_CUTS).map(([loc, cuts]) => [loc, cuts.map(c => Math.max(1, Math.round(c * k)))]));
+}
 export function quadOf(rank, loc, teamCount = 300) {
   if (!rank) return 4;
-  const cuts = QUAD_CUTS[loc] || QUAD_CUTS.neutral, k = teamCount / 300;
-  const i = cuts.findIndex(c => rank <= Math.round(c * k));
+  const all = quadCuts(teamCount), cuts = all[loc] || all.neutral;
+  const i = cuts.findIndex(c => rank <= c);
   return i < 0 ? 4 : i + 1;
 }
 export function quadrants(season, r = rpi(season), filter = null) {

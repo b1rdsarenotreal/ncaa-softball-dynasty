@@ -1,14 +1,14 @@
 // Season pages: home, schedule, standings, rankings and postseason.
 
-import { ctx, S, app, modal, $, $$, esc, toast, changed, persist, cache, team, teamOptions, teamNames, confLogo, confHref, confColor, confInfo, gameCard, compactCard, placeholderCard, bindGameCards, openGame, resultText, DAY_NAMES, readableOn, teamInfo, logoImg } from './ui.js?v=20261014155521';
-import { isFinal, winnerOf, records, rpi, confStandings, conferences, regSeasonChamp, regSeasonChamps, TIEBREAKERS, quadrants, QUAD_CUTS } from './standings.js?v=20261014155521';
-import { latestPoll, generatePoll, pollRankMap, pollSizeOf, VOTER_PANEL, voterStyle } from './polls.js?v=20261014155521';
-import { ovr } from './sim.js?v=20261014155521';
-import { simGames, addGame, weekName } from './league.js?v=20261014155521';
-import { CONF_FORMATS, confFormatName, confKind } from './postseason.js?v=20261014155521';
-import { quadRanks, COMMITTEE_WEIGHTS, mcwsVenue, postWeeks, regWeeksOf, ncaaConfig, hasSupers, fieldSize, wsTeams, formatSummary, shownSeed, postseasonBonus, defaultConfTourneySize, confTourneySeeds, reseedConfTourney, proposeField, lockField, pods, nodeTeams, nodeNeeded, runnerUp, committeeOrder, autoBids, refLabel, setConfFormat, ensureLayout, confHost, setConfHost, mcwsHistory, selectionBoard, setAtLarge, confirmField, unconfirmField, bracketology, BRACKETOLOGY_FROM_WEEK } from './postseason.js?v=20261014155521';
-import { fmtPct, hashStr } from './util.js?v=20261014155521';
-import { DAY_ORDER } from './schedule.js?v=20261014155521';
+import { ctx, S, app, modal, $, $$, esc, toast, changed, persist, cache, team, teamOptions, teamNames, confLogo, confHref, confColor, confInfo, gameCard, compactCard, placeholderCard, bindGameCards, openGame, resultText, DAY_NAMES, readableOn, teamInfo, logoImg } from './ui.js?v=20261014163557';
+import { isFinal, winnerOf, records, rpi, confStandings, conferences, regSeasonChamp, regSeasonChamps, TIEBREAKERS, quadrants, quadCuts } from './standings.js?v=20261014163557';
+import { latestPoll, generatePoll, pollRankMap, pollSizeOf, VOTER_PANEL, voterStyle } from './polls.js?v=20261014163557';
+import { ovr } from './sim.js?v=20261014163557';
+import { simGames, addGame, weekName } from './league.js?v=20261014163557';
+import { CONF_FORMATS, confFormatName, confKind } from './postseason.js?v=20261014163557';
+import { quadRanks, COMMITTEE_WEIGHTS, mcwsVenue, postWeeks, regWeeksOf, ncaaConfig, hasSupers, fieldSize, wsTeams, formatSummary, shownSeed, postseasonBonus, defaultConfTourneySize, confTourneySeeds, reseedConfTourney, proposeField, lockField, pods, nodeTeams, nodeNeeded, runnerUp, committeeOrder, autoBids, refLabel, setConfFormat, ensureLayout, confHost, setConfHost, mcwsHistory, selectionBoard, setAtLarge, confirmField, unconfirmField, bracketology, BRACKETOLOGY_FROM_WEEK } from './postseason.js?v=20261014163557';
+import { fmtPct, hashStr } from './util.js?v=20261014163557';
+import { DAY_ORDER } from './schedule.js?v=20261014163557';
 
 const ui = { week: null, schedFilter: 'all', pollWeek: null, rankTab: 'poll', postTab: null, editPoll: null, voter: null };
 export function resetSeasonUi() { ui.week = null; ui.pollWeek = null; ui.postTab = null; ui.editPoll = null; }
@@ -369,7 +369,7 @@ function renderRpiTab(root) {
     <thead><tr><th class="num">RPI</th><th>Team</th><th>Conf</th><th class="num">Record</th><th class="num">WP</th><th class="num">OWP</th><th class="num">OOWP</th><th class="num">Rating</th><th class="num">SOS</th><th class="num">Poll</th>${QHEAD}</tr></thead>
     <tbody>${teams.map(t => `<tr><td class="num"><b>${r[t].rank}</b></td><td>${team(t, { rank: false })}</td><td>${confLogo(s.teams[t].conference, 18)}</td><td class="num">${recs[t].w}-${recs[t].l}</td>
       <td class="num">${fmtPct(r[t].wp)}</td><td class="num">${fmtPct(r[t].owp)}</td><td class="num">${fmtPct(r[t].oowp)}</td><td class="num"><b>${r[t].rpi.toFixed(4).replace(/^0/, '')}</b></td><td class="num muted">${r[t].sosRank ?? ''}</td><td class="num muted">${pr[t] ?? ''}</td>${[0, 1, 2, 3].map(i => qc(t, i)).join('')}</tr>`).join('') || '<tr><td colspan="14" class="muted">The RPI starts once games are played.</td></tr>'}</tbody></table></div>
-    <p class="small muted">RPI = 25% winning percentage + 50% opponents' winning percentage (not counting games against this team) + 25% opponents' opponents' winning percentage. The selection committee weighs RPI rank 60%, quadrant wins 25% and strength-of-schedule rank 15%. ${QUAD_TEXT}</p></div>`;
+    <p class="small muted">RPI = 25% winning percentage + 50% opponents' winning percentage (not counting games against this team) + 25% opponents' opponents' winning percentage. The selection committee weighs RPI rank 60%, quadrant wins 25% and strength-of-schedule rank 15%. ${quadText(Object.keys(s.teams).length)}</p></div>`;
 }
 
 function renderSosTab(root) {
@@ -621,7 +621,8 @@ function editSeeds(conf) {
 
 const COMMITTEE_TEXT = `RPI ${COMMITTEE_WEIGHTS.rpi * 100}%, quadrant wins ${COMMITTEE_WEIGHTS.quad * 100}%, SOS ${COMMITTEE_WEIGHTS.sos * 100}%`;
 const QHEAD = ['Q1', 'Q2', 'Q3', 'Q4'].map((q, i) => `<th class="num q${i + 1}" title="Record in ${q} games (see the note below the table)">${q}</th>`).join('');
-const QUAD_TEXT = `Quadrants follow the NCAA team sheet: a game's quadrant depends on the opponent's RPI rank and where it was played. Q1 is home vs. RPI 1-${QUAD_CUTS.home[0]}, neutral 1-${QUAD_CUTS.neutral[0]}, away 1-${QUAD_CUTS.away[0]}; Q2 home ${QUAD_CUTS.home[0] + 1}-${QUAD_CUTS.home[1]}, neutral ${QUAD_CUTS.neutral[0] + 1}-${QUAD_CUTS.neutral[1]}, away ${QUAD_CUTS.away[0] + 1}-${QUAD_CUTS.away[1]}; Q3 home ${QUAD_CUTS.home[1] + 1}-${QUAD_CUTS.home[2]}, neutral ${QUAD_CUTS.neutral[1] + 1}-${QUAD_CUTS.neutral[2]}, away ${QUAD_CUTS.away[1] + 1}-${QUAD_CUTS.away[2]}; Q4 is everything else. For the committee, Q1 and Q2 wins count most and Q3 and Q4 losses hurt most.`;
+const quadText = n => { const C = quadCuts(n), r = (loc, k) => `${k ? C[loc][k - 1] + 1 : 1}-${C[loc][k]}`;
+  return `Quadrants follow the NCAA team sheet: a game's quadrant depends on the opponent's RPI rank and where it was played. Q1 is home vs. RPI ${r('home', 0)}, neutral ${r('neutral', 0)}, away ${r('away', 0)}; Q2 home ${r('home', 1)}, neutral ${r('neutral', 1)}, away ${r('away', 1)}; Q3 home ${r('home', 2)}, neutral ${r('neutral', 2)}, away ${r('away', 2)}; Q4 is everything else. For the committee, Q1 and Q2 wins count most and Q3 and Q4 losses hurt most.`; };
 
 // Drag-to-reorder for table rows. Works with a mouse, pen or finger: press
 // a row's handle (⠿), drag, and let go where the team should land. The page
@@ -710,7 +711,7 @@ function renderField(root) {
     <div class="small muted" style="margin-bottom:6px">The ${B.spots} at-large spots plus the next 10 teams, in committee order (${COMMITTEE_TEXT}). The line marks the committee's cut. Teams with a losing record can't take an at-large spot.${editable && !confirmed ? ' Check or uncheck teams to set the field.' : ''}</div>
     <div class="table-wrap"><table class="sel-table">${head('<th class="num">In</th>')}<tbody>${boardRows}</tbody></table></div>
     ${(() => { const cut = B.order.indexOf(B.board[B.board.length - 1]); const skipped = B.ineligible.filter(t => B.order.indexOf(t) < cut); return skipped.length ? `<p class="small muted" style="margin:8px 0 0"><b>Not eligible (losing record):</b> ${skipped.map(t => `${esc(t)} ${recs[t].w}-${recs[t].l}`).join(', ')}</p>` : ''; })()}
-    <p class="small muted" style="margin:8px 0 0">${QUAD_TEXT}</p>
+    <p class="small muted" style="margin:8px 0 0">${quadText(Object.keys(s.teams).length)}</p>
   </div>`;
   const seedRows = field.map((f, i) => { const t = f.team, x = Q[t].rec; return `<tr class="seed-row${i < cfg.regionals ? ' host' : ''}${i === cfg.regionals - 1 ? ' host-cut' : ''}" data-seed-i="${i}">
     ${editable ? `<td class="drag-cell"><span class="drag-handle" tabindex="0" role="button" data-drag="${i}" aria-label="Move ${esc(t)} (seed ${f.seed}). Drag, or use the up and down arrow keys" title="Drag to move">⠿</span></td>` : ''}

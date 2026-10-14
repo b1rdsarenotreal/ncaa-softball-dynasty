@@ -7,9 +7,9 @@
 // season cool it. These are suggestions only: nothing changes until the
 // commissioner fires someone.
 
-import { records, rpi, confStandings, regSeasonChamps } from './standings.js?v=20261014143014';
-import { wsTeams } from './postseason.js?v=20261014143014';
-import { ovr } from './sim.js?v=20261014143014';
+import { records, rpi, confStandings, regSeasonChamps } from './standings.js?v=20261014155521';
+import { wsTeams } from './postseason.js?v=20261014155521';
+import { ovr } from './sim.js?v=20261014155521';
 
 export const HEAT = {
   fire: { label: 'Fire suggested', min: 2.6 },
@@ -110,6 +110,7 @@ export function hotSeat(league, year = league.currentYear) {
     else if (now.f.field.has(t.school)) { score -= 0.7; cool.push('Made the NCAA tournament'); }
     if (now.f.confT.has(t.school)) { score -= 0.8; cool.push('Won the conference tournament'); }
     if (now.f.regTitle.has(t.school)) { score -= 0.8; cool.push('Won the regular-season title'); }
+    if (!reasons.length && !cool.length) reasons.push(gap > 0 ? `Went ${now.w}-${now.l}, a little under the roster's expected ${Math.round(now.exp * 100)}%` : `Went ${now.w}-${now.l}`);
     score = Math.round(score * 10) / 10;
     let level = score >= HEAT.fire.min ? 'fire' : score >= HEAT.hot.min ? 'hot' : score >= HEAT.warm.min ? 'warm' : null;
     // One season is never enough to recommend a firing.

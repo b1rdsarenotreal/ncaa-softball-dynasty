@@ -436,33 +436,47 @@ table.voters tr.sel td { background: var(--chip); }
 table.participants .c { text-align: center; font-variant-numeric: tabular-nums; }
 table.participants td { vertical-align: middle; }
 
-/* Selection tab: qualifiers board | seeds | regional preview */
-.sel-layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px 310px; gap: 16px; align-items: start; margin-top: 14px; }
+/* Selection tab. Picking teams: board | seeds placeholder. Seeding: seed table | regional preview, board folded below. */
+.sel-layout { display: grid; gap: 16px; align-items: start; margin-top: 14px; }
+.sel-layout.picking { grid-template-columns: minmax(0, 1fr) 260px; }
+.sel-layout.seeding { grid-template-columns: minmax(0, 1fr) 320px; }
 .sel-layout > * { min-width: 0; }
 .sel-layout > .card + .card { margin-top: 0; }
+.sel-board-wrap summary { cursor: pointer; padding: 2px 0; }
+.sel-board-wrap[open] summary { margin-bottom: 10px; }
+.sel-board-wrap > .sel-board { border: 0; box-shadow: none; padding: 0; margin: 0; background: none; }
 .sel-table { font-size: 13px; }
 .sel-table th, .sel-table td { padding: 5px 6px; white-space: nowrap; }
 .sel-table tr.sel-in td { background: color-mix(in srgb, var(--good) 8%, transparent); }
 .sel-table tr.cutline td { border-bottom: 2px solid var(--stitch); }
+/* The committee's order: RPI first, then quadrants, then SOS. */
+.sel-table .key { font-weight: 700; background: color-mix(in srgb, var(--board) 9%, transparent); }
+.sel-table th.key { color: var(--ink); }
+.sel-table td.q1, .sel-table td.q2 { font-weight: 600; }
+.sel-table th.q1, .sel-table td.q1 { border-left: 1px solid var(--line); }
+.sel-table th.q4, .sel-table td.q4 { border-right: 1px solid var(--line); }
 .sel-team { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
-.sel-seeds .seed-list { display: grid; gap: 4px; }
-.seed-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto auto; gap: 6px; align-items: center; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel-2); font-size: 13px; }
-.seed-row.host { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); }
-.seed-n { font: 600 13px var(--mono); text-align: center; }
-.seed-team { min-width: 0; overflow: hidden; }
-.seed-team .team { display: flex; min-width: 0; }
-.seed-team .team-link { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.seed-btns { display: inline-flex; gap: 3px; }
-.seed-btns .btn.sm { padding: 1px 6px; }
+.seed-table tr.host td { background: color-mix(in srgb, var(--gold) 10%, transparent); }
+.seed-table tr.host td.key { background: color-mix(in srgb, var(--gold) 10%, color-mix(in srgb, var(--board) 9%, transparent)); }
+.seed-table tr.host-cut td { border-bottom: 2px solid color-mix(in srgb, var(--gold) 70%, var(--line)); }
+.seed-n { font: 600 13px var(--mono); }
+.seed-team { max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+.seed-team .team { display: inline-flex; min-width: 0; vertical-align: middle; }
+.seed-table .badge { font-size: 9.5px; padding: 1px 5px; vertical-align: middle; }
+.badge.auto { background: color-mix(in srgb, var(--board) 14%, transparent); color: var(--ink); }
+.drag-cell { width: 22px; padding-right: 0 !important; }
+.drag-handle { display: inline-grid; place-items: center; width: 22px; height: 24px; border-radius: 5px; color: var(--muted); cursor: grab; touch-action: none; user-select: none; font-size: 15px; line-height: 1; }
+.drag-handle:hover, .drag-handle:focus-visible { background: var(--chip); color: var(--ink); outline: none; }
+.drag-handle:focus-visible { box-shadow: 0 0 0 2px var(--board); }
+body.is-dragging, body.is-dragging * { cursor: grabbing !important; user-select: none; }
+.seed-table tr.dragging td { opacity: .45; }
+.seed-table tr.drop-before td { box-shadow: inset 0 3px 0 var(--board); }
+.seed-table tr.drop-after td { box-shadow: inset 0 -3px 0 var(--board); }
 .sel-layout .reg-preview { position: sticky; top: 12px; }
-@media (max-width: 1320px) {
-  .sel-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .sel-layout .sel-board { grid-column: 1 / -1; }
+@media (max-width: 1100px) {
+  .sel-layout.picking, .sel-layout.seeding { grid-template-columns: minmax(0, 1fr); }
   .sel-layout .reg-preview { position: static; }
-  .sel-layout .reg-prev-list { grid-template-columns: minmax(0, 1fr); }
 }
-@media (max-width: 760px) { .sel-layout { grid-template-columns: minmax(0, 1fr); } }
-.seed-row .badge { font-size: 9.5px; padding: 1px 5px; }
 
 /* Records page */
 .rec-section { margin: 24px 0 10px; }

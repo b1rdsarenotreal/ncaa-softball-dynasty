@@ -12,10 +12,10 @@
 //     bracket winners).
 // The format is locked into the season when the field is announced.
 
-import { blankGame, DAY_ORDER } from './schedule.js?v=20261014143014';
-import { records, rpi, confStandings, conferences, isFinal, winnerOf, loserOf, regularSeasonDone, regSeasonChamp } from './standings.js?v=20261014143014';
-import { latestPoll, pollRankMap, generatePoll } from './polls.js?v=20261014143014';
-import { hashStr } from './util.js?v=20261014143014';
+import { blankGame, DAY_ORDER } from './schedule.js?v=20261014155521';
+import { records, rpi, confStandings, conferences, isFinal, winnerOf, loserOf, regularSeasonDone, regSeasonChamp, quadrants, quadScore } from './standings.js?v=20261014155521';
+import { generatePoll } from './polls.js?v=20261014155521';
+import { hashStr } from './util.js?v=20261014155521';
 
 // ---------- tournament format ----------
 
@@ -523,15 +523,22 @@ export function mcwsVenue(season) {
 // ---------- selection ----------
 
 // The committee's order, used to pick at-large teams and seed the field:
-// RPI rank 50%, poll rank 30%, strength-of-schedule rank 20%.
-export const COMMITTEE_WEIGHTS = { rpi: 0.5, poll: 0.3, sos: 0.2 };
+// RPI rank 60%, quadrant rank 25% (wins against Quadrant 1 and 2 teams count
+// most, Quadrant 3 and 4 losses hurt most; see quadScore) and
+// strength-of-schedule rank 15%. The poll isn't used.
+export const COMMITTEE_WEIGHTS = { rpi: 0.6, quad: 0.25, sos: 0.15 };
+export function quadRanks(season, r = rpi(season), Q = quadrants(season, r)) {
+  const teams = Object.keys(season.teams);
+  const sc = Object.fromEntries(teams.map(t => [t, quadScore(Q[t])]));
+  const sorted = [...teams].sort((a, b) => sc[b] - sc[a] || (r[a].rank ?? 999) - (r[b].rank ?? 999));
+  return Object.fromEntries(sorted.map((t, i) => [t, { rank: i + 1, score: sc[t] }]));
+}
 export function committeeOrder(season) {
   const r = rpi(season);
-  const pr = pollRankMap(latestPoll(season));
+  const qr = quadRanks(season, r);
   const teams = Object.keys(season.teams);
   const W = COMMITTEE_WEIGHTS;
-  const unranked = (latestPoll(season)?.ranks.length || 15) + 7;
-  const score = t => W.rpi * (r[t].rank ?? 99) + W.poll * (pr[t] ?? unranked) + W.sos * (r[t].sosRank ?? 99);
+  const score = t => W.rpi * (r[t].rank ?? 999) + W.quad * qr[t].rank + W.sos * (r[t].sosRank ?? 999);
   return teams.sort((a, b) => score(a) - score(b) || r[b].rpi - r[a].rpi);
 }
 

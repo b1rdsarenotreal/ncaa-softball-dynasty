@@ -107,7 +107,25 @@ try:
         pg.click("#f-confirm"); pg.wait_for_timeout(300)
         seeds = pg.evaluate("[...document.querySelectorAll('.seed-row .team-link')].map(a => a.title)")
         assert len(seeds) == 64 and in_team in seeds and out_team not in seeds, f"field follows the picks {in_team} {out_team} {seeds}"
-        pg.locator("[data-fdown='0']").click(); pg.wait_for_timeout(200)
+        heads = pg.locator(".seed-table thead").inner_text().split()
+        assert heads[:9] == ["Seed", "Team", "Rec", "RPI", "Q1", "Q2", "Q3", "Q4", "SOS"], f"seed table columns {heads}"
+        board_heads = pg.evaluate("[...document.querySelector('.sel-board .sel-table thead').querySelectorAll('th')].map(th => th.textContent.trim())")
+        assert board_heads.index("RPI") < board_heads.index("Q1") < board_heads.index("SOS") < board_heads.index("Poll"), f"board puts RPI, quadrants, then SOS {board_heads}"
+        # Drag seed 1 down below seed 3 with the mouse
+        order0 = pg.evaluate("[...document.querySelectorAll('.seed-row .team-link')].map(a => a.title)")
+        pg.locator("[data-drag='0']").scroll_into_view_if_needed(); pg.wait_for_timeout(100)
+        h = pg.locator("[data-drag='0']").bounding_box(); target = pg.locator(".seed-row").nth(2).bounding_box()
+        pg.mouse.move(h["x"] + h["width"] / 2, h["y"] + h["height"] / 2); pg.mouse.down()
+        pg.mouse.move(h["x"] + 5, target["y"] + target["height"] * 0.6, steps=8); pg.wait_for_timeout(100)
+        assert pg.locator(".seed-row.dragging").count() == 1 and pg.locator(".seed-row.drop-after").count() == 1, "drag shows where the team lands"
+        pg.mouse.up(); pg.wait_for_timeout(300)
+        order1 = pg.evaluate("[...document.querySelectorAll('.seed-row .team-link')].map(a => a.title)")
+        assert order1[:3] == [order0[1], order0[2], order0[0]] and order1[3:] == order0[3:], f"drag moved seed 1 to seed 3 {order0[:4]} -> {order1[:4]}"
+        # Keyboard: arrow up on the handle moves it back up one spot and keeps focus
+        pg.locator("[data-drag='2']").focus(); pg.keyboard.press("ArrowUp"); pg.wait_for_timeout(300)
+        order2 = pg.evaluate("[...document.querySelectorAll('.seed-row .team-link')].map(a => a.title)")
+        assert order2[1] == order0[0] and order2[2] == order0[2], "arrow key moves a seed"
+        assert pg.evaluate("document.activeElement.dataset.drag") == "1", "focus follows the moved team"
         pg.screenshot(path=f"{OUT}/08-field.png", full_page=True)
         assert pg.locator(".reg-preview .reg-prev").count() == 16, "regional preview shows every regional"
         for w in (1024, 390):

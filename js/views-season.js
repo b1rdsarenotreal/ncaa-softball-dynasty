@@ -1,14 +1,14 @@
 // Season pages: home, schedule, standings, rankings and postseason.
 
-import { ctx, S, app, modal, $, $$, esc, toast, changed, persist, cache, team, teamOptions, teamNames, confLogo, confHref, confColor, confInfo, gameCard, compactCard, placeholderCard, bindGameCards, openGame, resultText, DAY_NAMES, readableOn, teamInfo, logoImg } from './ui.js?v=20261014143014';
-import { isFinal, winnerOf, records, rpi, confStandings, conferences, regSeasonChamp, regSeasonChamps, TIEBREAKERS, quadrants } from './standings.js?v=20261014143014';
-import { latestPoll, generatePoll, pollRankMap, pollSizeOf, VOTER_PANEL, voterStyle } from './polls.js?v=20261014143014';
-import { ovr } from './sim.js?v=20261014143014';
-import { simGames, addGame, weekName } from './league.js?v=20261014143014';
-import { CONF_FORMATS, confFormatName, confKind } from './postseason.js?v=20261014143014';
-import { mcwsVenue, postWeeks, regWeeksOf, ncaaConfig, hasSupers, fieldSize, wsTeams, formatSummary, shownSeed, postseasonBonus, defaultConfTourneySize, confTourneySeeds, reseedConfTourney, proposeField, lockField, pods, nodeTeams, nodeNeeded, runnerUp, committeeOrder, autoBids, refLabel, setConfFormat, ensureLayout, confHost, setConfHost, mcwsHistory, selectionBoard, setAtLarge, confirmField, unconfirmField, bracketology, BRACKETOLOGY_FROM_WEEK } from './postseason.js?v=20261014143014';
-import { fmtPct, hashStr } from './util.js?v=20261014143014';
-import { DAY_ORDER } from './schedule.js?v=20261014143014';
+import { ctx, S, app, modal, $, $$, esc, toast, changed, persist, cache, team, teamOptions, teamNames, confLogo, confHref, confColor, confInfo, gameCard, compactCard, placeholderCard, bindGameCards, openGame, resultText, DAY_NAMES, readableOn, teamInfo, logoImg } from './ui.js?v=20261014155521';
+import { isFinal, winnerOf, records, rpi, confStandings, conferences, regSeasonChamp, regSeasonChamps, TIEBREAKERS, quadrants, QUAD_CUTS } from './standings.js?v=20261014155521';
+import { latestPoll, generatePoll, pollRankMap, pollSizeOf, VOTER_PANEL, voterStyle } from './polls.js?v=20261014155521';
+import { ovr } from './sim.js?v=20261014155521';
+import { simGames, addGame, weekName } from './league.js?v=20261014155521';
+import { CONF_FORMATS, confFormatName, confKind } from './postseason.js?v=20261014155521';
+import { quadRanks, COMMITTEE_WEIGHTS, mcwsVenue, postWeeks, regWeeksOf, ncaaConfig, hasSupers, fieldSize, wsTeams, formatSummary, shownSeed, postseasonBonus, defaultConfTourneySize, confTourneySeeds, reseedConfTourney, proposeField, lockField, pods, nodeTeams, nodeNeeded, runnerUp, committeeOrder, autoBids, refLabel, setConfFormat, ensureLayout, confHost, setConfHost, mcwsHistory, selectionBoard, setAtLarge, confirmField, unconfirmField, bracketology, BRACKETOLOGY_FROM_WEEK } from './postseason.js?v=20261014155521';
+import { fmtPct, hashStr } from './util.js?v=20261014155521';
+import { DAY_ORDER } from './schedule.js?v=20261014155521';
 
 const ui = { week: null, schedFilter: 'all', pollWeek: null, rankTab: 'poll', postTab: null, editPoll: null, voter: null };
 export function resetSeasonUi() { ui.week = null; ui.pollWeek = null; ui.postTab = null; ui.editPoll = null; }
@@ -349,7 +349,7 @@ function renderBracketology(root) {
   const regionals = B.regionals.map(teams => `<div class="card bo-reg"><div class="bo-head"><h3>${esc(teams[0])} Regional</h3><span class="muted small">Host: national seed ${seedOf[teams[0]]}</span></div>${teams.map(row).join('')}</div>`).join('');
   const list = (title, teams, note) => `<div class="bo-list"><h3>${title}</h3>${teams.length ? `<ol>${teams.map(t => `<li>${team(t, { rank: false, size: 16 })} <span class="muted small">${recs[t].w}-${recs[t].l} · RPI ${r[t]?.rank ?? '–'}</span></li>`).join('')}</ol>` : '<p class="muted small">—</p>'}${note ? `<p class="small muted">${note}</p>` : ''}</div>`;
   const autoList = Object.entries(B.autos).filter(([, t]) => t).sort((a, b) => a[0].localeCompare(b[0]));
-  root.innerHTML = `<div class="hint">Projected ${asOf}: ${B.field.length} teams in ${B.cfg.regionals} regionals. Automatic bids go to each conference's current leader${s.phase === 'conf' ? ' (or tournament champion)' : ''}; at-large spots and seeds follow the committee order (RPI 50%, poll 30%, strength of schedule 20%), and teams below .500 can't take an at-large spot. It changes as games are played.${B.fill.length ? ` <b>Too few at-large candidates are .500 or better to fill the field, so the best of the rest take the last ${B.fill.length} spot${B.fill.length > 1 ? 's' : ''}: ${B.fill.map(esc).join(', ')}.</b>` : ''}</div>
+  root.innerHTML = `<div class="hint">Projected ${asOf}: ${B.field.length} teams in ${B.cfg.regionals} regionals. Automatic bids go to each conference's current leader${s.phase === 'conf' ? ' (or tournament champion)' : ''}; at-large spots and seeds follow the committee order (RPI 60%, quadrant wins 25%, strength of schedule 15%), and teams below .500 can't take an at-large spot. It changes as games are played.${B.fill.length ? ` <b>Too few at-large candidates are .500 or better to fill the field, so the best of the rest take the last ${B.fill.length} spot${B.fill.length > 1 ? 's' : ''}: ${B.fill.map(esc).join(', ')}.</b>` : ''}</div>
     <div class="bo-layout">
       <div class="bo-grid">${regionals}</div>
       <aside class="card bo-side">
@@ -366,10 +366,10 @@ function renderRpiTab(root) {
   const qc = (t, i) => { const x = Q[t].rec[i]; return `<td class="num${x.w + x.l ? '' : ' muted'}">${x.w}-${x.l}</td>`; };
   const teams = Object.keys(s.teams).filter(t => r[t].games).sort((a, b) => r[a].rank - r[b].rank);
   root.innerHTML = `<div class="card"><div class="table-wrap"><table>
-    <thead><tr><th class="num">RPI</th><th>Team</th><th>Conf</th><th class="num">Record</th><th class="num">WP</th><th class="num">OWP</th><th class="num">OOWP</th><th class="num">Rating</th><th class="num">SOS</th><th class="num">Poll</th><th class="num" title="Record against Quadrant 1 (RPI top quarter)">Q1</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Q4</th></tr></thead>
+    <thead><tr><th class="num">RPI</th><th>Team</th><th>Conf</th><th class="num">Record</th><th class="num">WP</th><th class="num">OWP</th><th class="num">OOWP</th><th class="num">Rating</th><th class="num">SOS</th><th class="num">Poll</th>${QHEAD}</tr></thead>
     <tbody>${teams.map(t => `<tr><td class="num"><b>${r[t].rank}</b></td><td>${team(t, { rank: false })}</td><td>${confLogo(s.teams[t].conference, 18)}</td><td class="num">${recs[t].w}-${recs[t].l}</td>
       <td class="num">${fmtPct(r[t].wp)}</td><td class="num">${fmtPct(r[t].owp)}</td><td class="num">${fmtPct(r[t].oowp)}</td><td class="num"><b>${r[t].rpi.toFixed(4).replace(/^0/, '')}</b></td><td class="num muted">${r[t].sosRank ?? ''}</td><td class="num muted">${pr[t] ?? ''}</td>${[0, 1, 2, 3].map(i => qc(t, i)).join('')}</tr>`).join('') || '<tr><td colspan="14" class="muted">The RPI starts once games are played.</td></tr>'}</tbody></table></div>
-    <p class="small muted">RPI = 25% winning percentage + 50% opponents' winning percentage (not counting games against this team) + 25% opponents' opponents' winning percentage. The selection committee weighs RPI rank 50%, poll rank 30% and strength-of-schedule rank 20%. Quadrants: every team is placed in Q1–Q4 by RPI rank (Q1 is the top quarter); Q1–Q4 are each team's record against teams in that quadrant.</p></div>`;
+    <p class="small muted">RPI = 25% winning percentage + 50% opponents' winning percentage (not counting games against this team) + 25% opponents' opponents' winning percentage. The selection committee weighs RPI rank 60%, quadrant wins 25% and strength-of-schedule rank 15%. ${QUAD_TEXT}</p></div>`;
 }
 
 function renderSosTab(root) {
@@ -379,7 +379,7 @@ function renderSosTab(root) {
     <thead><tr><th class="num">SOS</th><th>Team</th><th>Conf</th><th class="num">Record</th><th class="num">Opponents' record</th><th class="num">Opp. win %</th><th class="num">Opp. opp. win %</th><th class="num">Rating</th><th class="num">RPI</th><th class="num">Poll</th></tr></thead>
     <tbody>${teams.map(t => `<tr><td class="num"><b>${r[t].sosRank}</b></td><td>${team(t, { rank: false })}</td><td>${confLogo(s.teams[t].conference, 18)}</td><td class="num">${recs[t].w}-${recs[t].l}</td>
       <td class="num">${r[t].oppW}-${r[t].oppL}</td><td class="num">${fmtPct(r[t].owp)}</td><td class="num">${fmtPct(r[t].oowp)}</td><td class="num"><b>${r[t].sos.toFixed(4).replace(/^0/, '')}</b></td><td class="num muted">${r[t].rank ?? ''}</td><td class="num muted">${pr[t] ?? ''}</td></tr>`).join('') || '<tr><td colspan="10" class="muted">Strength of schedule starts once games are played.</td></tr>'}</tbody></table></div>
-    <p class="small muted">Strength of schedule = ⅔ opponents' winning percentage (not counting games against this team) + ⅓ opponents' opponents' winning percentage. Opponents' record counts every game a team's opponents played, once per meeting. The selection committee uses SOS rank for 20% of its order, which picks the at-large teams and sets the seeds.</p></div>`;
+    <p class="small muted">Strength of schedule = ⅔ opponents' winning percentage (not counting games against this team) + ⅓ opponents' opponents' winning percentage. Opponents' record counts every game a team's opponents played, once per meeting. The selection committee uses SOS rank for 15% of its order, which picks the at-large teams and sets the seeds.</p></div>`;
 }
 
 function renderPowerTab(root) {
@@ -619,14 +619,65 @@ function editSeeds(conf) {
   modal.showModal();
 }
 
+const COMMITTEE_TEXT = `RPI ${COMMITTEE_WEIGHTS.rpi * 100}%, quadrant wins ${COMMITTEE_WEIGHTS.quad * 100}%, SOS ${COMMITTEE_WEIGHTS.sos * 100}%`;
+const QHEAD = ['Q1', 'Q2', 'Q3', 'Q4'].map((q, i) => `<th class="num q${i + 1}" title="Record in ${q} games (see the note below the table)">${q}</th>`).join('');
+const QUAD_TEXT = `Quadrants follow the NCAA team sheet: a game's quadrant depends on the opponent's RPI rank and where it was played. Q1 is home vs. RPI 1-${QUAD_CUTS.home[0]}, neutral 1-${QUAD_CUTS.neutral[0]}, away 1-${QUAD_CUTS.away[0]}; Q2 home ${QUAD_CUTS.home[0] + 1}-${QUAD_CUTS.home[1]}, neutral ${QUAD_CUTS.neutral[0] + 1}-${QUAD_CUTS.neutral[1]}, away ${QUAD_CUTS.away[0] + 1}-${QUAD_CUTS.away[1]}; Q3 home ${QUAD_CUTS.home[1] + 1}-${QUAD_CUTS.home[2]}, neutral ${QUAD_CUTS.neutral[1] + 1}-${QUAD_CUTS.neutral[2]}, away ${QUAD_CUTS.away[1] + 1}-${QUAD_CUTS.away[2]}; Q4 is everything else. For the committee, Q1 and Q2 wins count most and Q3 and Q4 losses hurt most.`;
+
+// Drag-to-reorder for table rows. Works with a mouse, pen or finger: press
+// a row's handle (⠿), drag, and let go where the team should land. The page
+// scrolls when the pointer nears the top or bottom of the window.
+function dragSort(tbody, onMove) {
+  tbody.addEventListener('pointerdown', e => {
+    const handle = e.target.closest('[data-drag]');
+    if (!handle || e.button > 0) return;
+    e.preventDefault();
+    const rows = [...tbody.querySelectorAll('tr')];
+    const from = +handle.dataset.drag, row = rows[from];
+    let to = from, lastY = e.clientY, raf = 0;
+    row.classList.add('dragging');
+    document.body.classList.add('is-dragging');
+    handle.setPointerCapture?.(e.pointerId);
+    const place = () => {
+      const y = lastY;
+      to = rows.length - 1;
+      for (let i = 0; i < rows.length; i++) {
+        const b = rows[i].getBoundingClientRect();
+        if (y < b.top + b.height / 2) { to = i > from ? i - 1 : i; break; }
+      }
+      rows.forEach((rw, i) => rw.classList.toggle('drop-before', to < from && i === to));
+      rows.forEach((rw, i) => rw.classList.toggle('drop-after', to > from && i === to));
+    };
+    const scroll = () => {
+      const edge = 60, h = window.innerHeight;
+      const dy = lastY < edge ? -(edge - lastY) / 3 : lastY > h - edge ? (lastY - (h - edge)) / 3 : 0;
+      if (dy) { window.scrollBy(0, dy); place(); }
+      raf = requestAnimationFrame(scroll);
+    };
+    raf = requestAnimationFrame(scroll);
+    const move = ev => { lastY = ev.clientY; place(); };
+    const up = () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
+      document.body.classList.remove('is-dragging');
+      rows.forEach(rw => rw.classList.remove('dragging', 'drop-before', 'drop-after'));
+      onMove(from, to);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+  });
+}
+
 function renderField(root) {
   const s = S(), p = s.post || {};
   if (!p.field) {
     const cfg = ncaaConfig(s);
-    root.innerHTML = `<div class="empty">The ${fieldSize(cfg)}-team NCAA field is chosen once every conference tournament is finished. It has ${Object.keys(ctx.league.conferences).length ? 'one automatic bid per conference (the tournament champion, or the regular-season champion where there is no tournament)' : 'automatic bids'}, and the rest are at-large picks. The committee orders teams by RPI rank (50%), poll rank (30%) and strength-of-schedule rank (20%) as a starting point; you pick the at-large teams and set the seeds.<br><br>${formatSummary(cfg)} <a href="#/settings">Change the format in Settings.</a></div>`;
+    root.innerHTML = `<div class="empty">The ${fieldSize(cfg)}-team NCAA field is chosen once every conference tournament is finished. It has ${Object.keys(ctx.league.conferences).length ? 'one automatic bid per conference (the tournament champion, or the regular-season champion where there is no tournament)' : 'automatic bids'}, and the rest are at-large picks. The committee orders teams by RPI rank (60%), quadrant wins (25%) and strength-of-schedule rank (15%) as a starting point; you pick the at-large teams and set the seeds.<br><br>${formatSummary(cfg)} <a href="#/settings">Change the format in Settings.</a></div>`;
     return;
   }
-  const r = rpi(s), pr = cache.ranks(), recs = cache.recs(), Q = quadrants(s, r);
+  const r = rpi(s), pr = cache.ranks(), recs = cache.recs(), Q = quadrants(s, r), QR = quadRanks(s, r, Q);
   const editable = s.phase === 'selection';
   const confirmed = !editable || !!p.fieldConfirmed;
   const cfg = ncaaConfig(s);
@@ -640,9 +691,9 @@ function renderField(root) {
     if (s.overrides?.autoBids?.[c]) return 'Commissioner';
     return s.post?.confT?.[c]?.champion === t ? 'Tournament' : 'Reg. season';
   };
-  const qcell = (t, i) => { const x = Q[t].rec[i]; return `<td class="num${x.w + x.l ? '' : ' muted'}">${x.w}-${x.l}</td>`; };
-  const stats = t => `<td class="num">${recs[t].w}-${recs[t].l}</td><td class="num">${r[t]?.rank ?? ''}</td><td class="num muted">${r[t]?.sosRank ?? ''}</td><td class="num muted">${pr[t] ?? ''}</td>${[0, 1, 2, 3].map(i => qcell(t, i)).join('')}`;
-  const head = first => `<thead><tr>${first}<th>Team</th><th class="num">Rec</th><th class="num">RPI</th><th class="num">SOS</th><th class="num">Poll</th><th class="num" title="Record against Quadrant 1 teams (RPI top quarter)">Q1</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Q4</th></tr></thead>`;
+  const qcell = (t, i) => { const x = Q[t].rec[i]; return `<td class="num q${i + 1}${x.w + x.l ? '' : ' muted'}">${x.w}-${x.l}</td>`; };
+  const stats = t => `<td class="num">${recs[t].w}-${recs[t].l}</td><td class="num key">${r[t]?.rank ?? ''}</td>${[0, 1, 2, 3].map(i => qcell(t, i)).join('')}<td class="num">${r[t]?.sosRank ?? ''}</td><td class="num muted">${pr[t] ?? ''}</td>`;
+  const head = first => `<thead><tr>${first}<th>Team</th><th class="num">Rec</th><th class="num key" title="RPI rank">RPI</th>${QHEAD}<th class="num" title="Strength-of-schedule rank">SOS</th><th class="num" title="Poll rank (not used by the committee)">Poll</th></tr></thead>`;
   const teamCell = t => `<td><span class="sel-team">${confLogo(s.teams[t].conference, 16)}${team(t, { rank: false, size: 16 })}</span></td>`;
   const lastIn = new Set(p.lastIn || []), firstOut = new Set(p.firstOut || []);
   const autoRows = B.autos.map(t => `<tr><td class="num muted">${crank[t]}</td>${teamCell(t)}${stats(t)}<td class="small muted">${via(t)}</td></tr>`).join('');
@@ -656,32 +707,48 @@ function renderField(root) {
     <div class="table-wrap"><table class="sel-table">${head('<th class="num" title="Committee order">#</th>')}<tbody>${autoRows}</tbody></table></div>
     <div class="row" style="margin:16px 0 6px"><h2 style="margin:0">At-large · ${B.chosen.length} of ${B.spots}</h2><span class="spacer"></span>
       ${editable && !confirmed ? `<button class="btn primary sm" id="f-confirm" ${B.chosen.length === B.spots ? '' : 'disabled'}>Confirm the ${B.size} teams</button>` : ''}</div>
-    <div class="small muted" style="margin-bottom:6px">The ${B.spots} at-large spots plus the next 10 teams, in committee order (RPI 50%, poll 30%, SOS 20%). The line marks the committee's cut. Teams with a losing record can't take an at-large spot.${editable && !confirmed ? ' Check or uncheck teams to set the field.' : ''}</div>
+    <div class="small muted" style="margin-bottom:6px">The ${B.spots} at-large spots plus the next 10 teams, in committee order (${COMMITTEE_TEXT}). The line marks the committee's cut. Teams with a losing record can't take an at-large spot.${editable && !confirmed ? ' Check or uncheck teams to set the field.' : ''}</div>
     <div class="table-wrap"><table class="sel-table">${head('<th class="num">In</th>')}<tbody>${boardRows}</tbody></table></div>
     ${(() => { const cut = B.order.indexOf(B.board[B.board.length - 1]); const skipped = B.ineligible.filter(t => B.order.indexOf(t) < cut); return skipped.length ? `<p class="small muted" style="margin:8px 0 0"><b>Not eligible (losing record):</b> ${skipped.map(t => `${esc(t)} ${recs[t].w}-${recs[t].l}`).join(', ')}</p>` : ''; })()}
-    <p class="small muted" style="margin:8px 0 0">Quadrants split every team into quarters by RPI rank: Q1 is the top ${Math.ceil(Object.keys(s.teams).length / 4)}. Q1–Q4 are each team's record against teams in that quadrant.</p>
+    <p class="small muted" style="margin:8px 0 0">${QUAD_TEXT}</p>
   </div>`;
-  const seedRows = field.map((f, i) => `<div class="seed-row${i < cfg.regionals ? ' host' : ''}"><span class="seed-n">${f.seed}</span><span class="seed-team">${team(f.team, { rank: false, size: 16 })}</span>${i < cfg.regionals ? '<span class="badge gold">Host</span>' : ''}
-    ${editable ? `<span class="seed-btns"><button class="btn sm" data-fup="${i}" ${i ? '' : 'disabled'} aria-label="Move up">▲</button><button class="btn sm" data-fdown="${i}" ${i < field.length - 1 ? '' : 'disabled'} aria-label="Move down">▼</button></span>` : ''}</div>`).join('');
+  const seedRows = field.map((f, i) => { const t = f.team, x = Q[t].rec; return `<tr class="seed-row${i < cfg.regionals ? ' host' : ''}${i === cfg.regionals - 1 ? ' host-cut' : ''}" data-seed-i="${i}">
+    ${editable ? `<td class="drag-cell"><span class="drag-handle" tabindex="0" role="button" data-drag="${i}" aria-label="Move ${esc(t)} (seed ${f.seed}). Drag, or use the up and down arrow keys" title="Drag to move">⠿</span></td>` : ''}
+    <td class="num seed-n">${f.seed}</td><td class="seed-team">${team(t, { rank: false, size: 16 })}${i < cfg.regionals ? ' <span class="badge gold">Host</span>' : ''}${f.bid === 'auto' ? ' <span class="badge auto" title="Automatic qualifier">AQ</span>' : ''}</td>
+    <td class="num">${recs[t].w}-${recs[t].l}</td><td class="num key">${r[t]?.rank ?? ''}</td>${[0, 1, 2, 3].map(k => `<td class="num q${k + 1}${x[k].w + x[k].l ? '' : ' muted'}">${x[k].w}-${x[k].l}</td>`).join('')}<td class="num">${r[t]?.sosRank ?? ''}</td></tr>`; }).join('');
   const seeding = `<div class="card sel-seeds"><h2 style="margin:0 0 4px">Seeds 1–${field.length}</h2>
-    ${confirmed ? `<div class="small muted" style="margin-bottom:8px">The top ${cfg.regionals} host. Regionals are built serpentine (seed 1 with seed ${cfg.regionals * 2}${cfg.perRegional > 2 ? `, ${cfg.regionals * 2 + 1}` : ''}…).</div><div class="seed-list">${seedRows}</div>
-      ${editable ? '<div class="stack" style="margin-top:12px;gap:8px"><button class="btn primary" id="f-lock">Announce field & start regionals</button><button class="btn" id="f-unconfirm">Change teams</button></div>' : ''}`
+    ${confirmed ? `<div class="small muted" style="margin-bottom:8px">${editable ? 'Drag a team by its handle (⠿) to move it; on a keyboard, focus the handle and use the arrow keys. ' : ''}The top ${cfg.regionals} host. Regionals are built serpentine (seed 1 with seed ${cfg.regionals * 2}${cfg.perRegional > 2 ? `, ${cfg.regionals * 2 + 1}` : ''}…).</div>
+      <div class="table-wrap"><table class="sel-table seed-table"><thead><tr>${editable ? '<th aria-label="Move"></th>' : ''}<th class="num">Seed</th><th>Team</th><th class="num">Rec</th><th class="num key" title="RPI rank">RPI</th>${QHEAD}<th class="num" title="Strength-of-schedule rank">SOS</th></tr></thead><tbody class="seed-list">${seedRows}</tbody></table></div>
+      ${editable ? '<div class="row" style="margin-top:12px;gap:8px"><button class="btn primary" id="f-lock">Announce field & start regionals</button><button class="btn" id="f-unconfirm">Change teams</button></div>' : ''}`
       : `<p class="muted small">Pick the at-large teams and confirm them, then set the seeds here.</p>`}
   </div>`;
   const podList = pods(field, cfg.regionals);
   root.innerHTML = `
     ${editable ? `<div class="hint">1. Pick the at-large teams (automatic qualifiers are in). 2. Confirm the ${B.size} teams. 3. Order seeds 1–${B.size}; the regional preview updates as you go. 4. Announce the field.<br>${formatSummary(cfg)}</div>` : ''}
-    <div class="sel-layout">${board}${seeding}${confirmed ? regionalPreview(s, field, podList, r) : '<div class="card reg-preview"><h2 style="margin:0 0 4px">Regional preview</h2><p class="muted small">Shows up once the teams are confirmed.</p></div>'}</div>`;
+    ${confirmed
+      ? `<div class="sel-layout seeding">${seeding}${regionalPreview(s, field, podList, r)}</div><details class="card sel-board-wrap" style="margin-top:16px"><summary><b>Selection board</b> <span class="muted small">(automatic qualifiers and the at-large board)</span></summary>${board}</details>`
+      : `<div class="sel-layout picking">${board}${seeding}</div>`}`;
   if (!editable) return;
   const setField = list => { p.field = list.map((f, i) => ({ ...f, seed: i + 1 })); changed({ progress: false }); };
   $$('[data-al]', root).forEach(cb => (cb.onchange = () => {
     try { setAtLarge(s, cb.dataset.al, cb.checked); } catch (e) { cb.checked = !cb.checked; return toast(e.message, true); }
     changed({ progress: false });
   }));
-  $$('[data-fup]', root).forEach(b => (b.onclick = () => { const i = +b.dataset.fup; [field[i - 1], field[i]] = [field[i], field[i - 1]]; setField(field); }));
-  $$('[data-fdown]', root).forEach(b => (b.onclick = () => { const i = +b.dataset.fdown; [field[i + 1], field[i]] = [field[i], field[i + 1]]; setField(field); }));
+  const moveSeed = (from, to) => {
+    if (to < 0 || to >= field.length || to === from) return;
+    const [f] = field.splice(from, 1); field.splice(to, 0, f);
+    ui.seedFocus = to; setField(field);
+  };
+  const tbody = $('.seed-list', root);
+  if (tbody) dragSort(tbody, moveSeed);
+  $$('[data-drag]', root).forEach(h => (h.onkeydown = e => {
+    const i = +h.dataset.drag;
+    if (e.key === 'ArrowUp') { e.preventDefault(); moveSeed(i, i - 1); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); moveSeed(i, i + 1); }
+  }));
+  if (ui.seedFocus != null) { $(`[data-drag="${ui.seedFocus}"]`, root)?.focus(); ui.seedFocus = null; }
   $('#f-redo', root).onclick = () => { if (confirm('Throw out your changes and re-run the committee selection?')) { proposeField(s); changed({ progress: false }); } };
-  if ($('#f-confirm', root)) $('#f-confirm', root).onclick = () => { try { confirmField(s); } catch (e) { return toast(e.message, true); } changed({ progress: false }); toast('Teams confirmed. Now set the seeds.'); };
+  if ($('#f-confirm', root)) $('#f-confirm', root).onclick = () => { try { confirmField(s); } catch (e) { return toast(e.message, true); } changed({ progress: false }); toast('Teams confirmed. Now set the seeds.'); setTimeout(() => document.querySelector('.sel-seeds')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 0); };
   if ($('#f-unconfirm', root)) $('#f-unconfirm', root).onclick = () => { unconfirmField(s); changed({ progress: false }); };
   if ($('#f-lock', root)) $('#f-lock', root).onclick = () => { lockField(s); ui.postTab = 'regionals'; changed(); toast('Field announced. Regionals are set.'); };
 }

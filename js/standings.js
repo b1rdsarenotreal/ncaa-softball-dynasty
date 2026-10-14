@@ -1,6 +1,6 @@
 // Records, conference standings with tiebreakers, and the RPI.
 
-import { pct, hashStr } from './util.js?v=20261014143014';
+import { pct, hashStr } from './util.js?v=20261014155521';
 
 export const isFinal = g => g.final && g.homeR != null && g.awayR != null;
 export const winnerOf = g => (g.homeR > g.awayR ? g.home : g.away);
@@ -87,23 +87,48 @@ export function rpi(season, filter = null) {
 // Quadrants: every team is placed in Q1–Q4 by RPI rank (top quarter is Q1),
 // and each team's record is split by the quadrant of the opponent. "Q1 wins"
 // are wins over top-quarter teams. Teams without games yet go in Q4.
+// NCAA team-sheet quadrants. A game's quadrant depends on the opponent's RPI
+// rank and where it was played, as on the NCAA's own sheets (for a
+// 300-team league; the cut-offs scale with league size):
+//   Q1: home 1-30, neutral 1-50, away 1-75
+//   Q2: home 31-75, neutral 51-100, away 76-135
+//   Q3: home 76-160, neutral 101-200, away 136-240
+//   Q4: everything else
+// `rec[i]` is each team's record in Quadrant i+1. `q` is the quadrant a home
+// game against the team would count as (used for display).
+export const QUAD_CUTS = { home: [30, 75, 160], neutral: [50, 100, 200], away: [75, 135, 240] };
+export function gameLocation(g, t) {
+  if (g.site) return g.site === t ? 'home' : 'away';
+  if (g.neutral) return 'neutral';
+  return g.home === t ? 'home' : 'away';
+}
+export function quadOf(rank, loc, teamCount = 300) {
+  if (!rank) return 4;
+  const cuts = QUAD_CUTS[loc] || QUAD_CUTS.neutral, k = teamCount / 300;
+  const i = cuts.findIndex(c => rank <= Math.round(c * k));
+  return i < 0 ? 4 : i + 1;
+}
 export function quadrants(season, r = rpi(season), filter = null) {
-  const teams = Object.keys(season.teams);
-  const per = Math.ceil(teams.length / 4) || 1;
-  const quad = {};
-  for (const t of teams) quad[t] = r[t]?.rank ? Math.min(4, Math.ceil(r[t].rank / per)) : 4;
+  const teams = Object.keys(season.teams), n = teams.length;
   const out = {};
-  for (const t of teams) out[t] = { q: quad[t], rec: [0, 1, 2, 3].map(() => ({ w: 0, l: 0 })) };
+  for (const t of teams) out[t] = { q: quadOf(r[t]?.rank, 'home', n), rec: [0, 1, 2, 3].map(() => ({ w: 0, l: 0 })) };
   for (const g of season.games) {
     if (!isFinal(g) || (filter && !filter(g))) continue;
     const w = winnerOf(g);
     for (const [t, o] of [[g.home, g.away], [g.away, g.home]]) {
-      if (!out[t] || !quad[o]) continue;
-      const x = out[t].rec[quad[o] - 1];
+      if (!out[t] || !out[o]) continue;
+      const x = out[t].rec[quadOf(r[o]?.rank, gameLocation(g, t), n) - 1];
       w === t ? x.w++ : x.l++;
     }
   }
   return out;
+}
+
+// One number for a team's quadrant résumé: wins count more the better the
+// quadrant, losses cost more the worse the quadrant.
+export const QUAD_WIN = [4, 2, 1, 0.25], QUAD_LOSS = [0, 0.5, 2, 4];
+export function quadScore(x) {
+  return x.rec.reduce((a, q, i) => a + q.w * QUAD_WIN[i] - q.l * QUAD_LOSS[i], 0);
 }
 
 // Conference games only: each team's record against a set of opponents.

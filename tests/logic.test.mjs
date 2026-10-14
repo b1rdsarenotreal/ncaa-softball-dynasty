@@ -161,7 +161,19 @@ assert.throws(() => setConfFormat(s, 'West Coast', 'double'), /already started/)
   assert.throws(() => setAtLarge(s, out, true), /Unlock/);
   const Q = quadrants(s);
   const q1 = Object.values(Q).filter(x => x.q === 1).length;
-  assert.equal(q1, Math.ceil(Object.keys(s.teams).length / 4), 'Q1 is the top quarter');
+  assert.equal(q1, 30, 'a home game counts as Q1 against the RPI top 30');
+  { const { quadOf, gameLocation, quadScore } = await import('../js/standings.js');
+    assert.deepEqual([quadOf(30, 'home'), quadOf(31, 'home'), quadOf(50, 'neutral'), quadOf(75, 'away'), quadOf(76, 'away'), quadOf(240, 'away'), quadOf(241, 'away')], [1, 2, 1, 1, 2, 3, 4]);
+    assert.equal(gameLocation({ home: 'A', away: 'B' }, 'B'), 'away');
+    assert.equal(gameLocation({ home: 'A', away: 'B', neutral: true }, 'A'), 'neutral');
+    assert.equal(gameLocation({ home: 'A', away: 'B', neutral: true, site: 'B' }, 'B'), 'home', "playing at your own field counts as home");
+    assert.ok(quadScore({ rec: [{ w: 1, l: 0 }, { w: 0, l: 0 }, { w: 0, l: 0 }, { w: 0, l: 0 }] }) > quadScore({ rec: [{ w: 0, l: 0 }, { w: 0, l: 0 }, { w: 0, l: 0 }, { w: 4, l: 1 }] }), 'a Q1 win beats piling up Q4 wins with a Q4 loss');
+    // Committee order follows RPI most of all
+    const { committeeOrder } = await import('../js/postseason.js');
+    const ord = committeeOrder(s), r = rpi(s);
+    const avgGap = ord.slice(0, 64).reduce((a, t, i) => a + Math.abs(r[t].rank - (i + 1)), 0) / 64;
+    console.log('committee order vs RPI rank, top 64: average gap', avgGap.toFixed(1));
+    assert.ok(avgGap < 8, 'committee order stays close to the RPI'); }
   for (const t of Object.keys(s.teams)) { const g = Q[t].rec.reduce((n, x) => n + x.w + x.l, 0); assert.equal(g, s.games.filter(x => isFinal(x) && (x.home === t || x.away === t)).length, 'quadrant records cover every game'); }
 }
 simGames(s, undefined, { autoLock: true });

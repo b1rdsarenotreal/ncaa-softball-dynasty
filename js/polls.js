@@ -11,8 +11,8 @@
 // Personalities live here in the code and aren't editable in the app.
 // The commissioner can still edit any published poll.
 
-import { rng, normal, hashStr, clamp } from './util.js?v=20261014143014';
-import { records, rpi, isFinal, winnerOf } from './standings.js?v=20261014143014';
+import { rng, normal, hashStr, clamp } from './util.js?v=20261014155521';
+import { records, rpi, isFinal, winnerOf } from './standings.js?v=20261014155521';
 
 export const DEFAULT_POLL_SIZE = 25;
 export const POLL_SIZES = [10, 15, 20, 25];
